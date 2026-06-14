@@ -4,6 +4,7 @@ ProgJar(D) <br>
 Institut Teknologi Sepuluh Nopember (ITS) <br>
 Melvan Hapianan Allo Ponglabba <br>
 5025241124 <br>
+Link Short Demo: https://youtu.be/E2-WbprWwqY
 
 ---
 
@@ -457,9 +458,14 @@ data/
 scripts/
   build_dictionary.js  Generator yang menghasilkan words_id.json
 test/                  Property-based tests (node --test + fast-check)
-.kiro/specs/wordfuse/  Dokumen spec (design, requirements, tasks)
 ```
 
 ---
+### 9.6 UI
+<img width="595" height="1217" alt="image" src="https://github.com/user-attachments/assets/1f8fdc4d-eb30-4f09-93e7-31acdcac1879" />
+<img width="611" height="1218" alt="image" src="https://github.com/user-attachments/assets/421df288-a69b-4ca1-968f-1181d9a485e2" /> <br>
+<img width="1876" height="984" alt="image" src="https://github.com/user-attachments/assets/2822dddf-3f2a-4f40-ab5a-8125a1a8b558" /> <br>
+<img width="1548" height="985" alt="image" src="https://github.com/user-attachments/assets/fc79b06e-b89d-45bf-b249-7d1ee71834b1" /> <br>
+
 
 *Dokumen ini ditulis sebagai laporan akhir Final Project mata kuliah Jaringan Komputer di Institut Teknologi Sepuluh Nopember (ITS).*
