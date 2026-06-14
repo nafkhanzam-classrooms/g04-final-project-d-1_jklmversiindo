@@ -1,0 +1,8 @@
+node_modules/
+wordfuse.db
+wordfuse.db-journal
+wordfuse.db-shm
+wordfuse.db-wal
+*.log
+.vscode/
+.kiro/

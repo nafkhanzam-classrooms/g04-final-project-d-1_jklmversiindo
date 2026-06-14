@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WordFuse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="screen-join">
+  <main>
+    <!-- =========================== JOIN ============================= -->
+    <section id="screen-join" class="screen" aria-labelledby="join-title">
+      <h1 id="join-title">WordFuse</h1>
+      <p class="lead">Real-time multiplayer word game on your LAN. Type an Indonesian word that contains the syllable before the bomb explodes.</p>
+      <form id="join-form" autocomplete="off">
+        <label for="name">Display name</label>
+        <input id="name" name="name" type="text" maxlength="20" required placeholder="e.g. Alice" />
+        <button id="join-btn" type="submit">Join lobby</button>
+      </form>
+      <h2>Lobby</h2>
+      <ul id="lobby-list" aria-live="polite"></ul>
+      <button id="start-btn" type="button" hidden>Start game</button>
+      <p id="join-status" class="status" aria-live="polite"></p>
+    </section>
+
+    <!-- =========================== GAME ============================= -->
+    <section id="screen-game" class="screen" aria-labelledby="game-title">
+      <h1 id="game-title" class="visually-hidden">WordFuse — Game in progress</h1>
+      <div class="game-stage">
+        <div class="bomb" id="bomb" aria-hidden="true"></div>
+        <div class="syllable" id="syllable" aria-live="polite">--</div>
+        <div class="timer-bar-wrap" aria-label="Bomb timer">
+          <div class="timer-bar" id="timer-bar"></div>
+        </div>
+        <div class="timer-text" id="timer-text">10.0s</div>
+      </div>
+      <ul id="player-list" class="player-list" aria-label="Players"></ul>
+      <p id="last-word" class="last-word" aria-live="polite"></p>
+      <form id="word-form" autocomplete="off">
+        <label for="word" class="visually-hidden">Your word</label>
+        <input id="word" name="word" type="text" maxlength="64" autocomplete="off"
+               placeholder="Type a word containing the syllable" disabled />
+        <button id="word-submit" type="submit" disabled>Send</button>
+      </form>
+      <p id="game-status" class="status" aria-live="polite"></p>
+    </section>
+
+    <!-- =========================== RESULTS ========================== -->
+    <section id="screen-results" class="screen" aria-labelledby="results-title">
+      <h1 id="results-title">Game over</h1>
+      <p id="winner-banner" class="winner-banner"></p>
+      <h2>Final standings</h2>
+      <ol id="scoreboard" class="scoreboard"></ol>
+      <button id="play-again-btn" type="button">Back to lobby</button>
+    </section>
+  </main>
+
+  <!-- =========================== CHAT PANEL ========================== -->
+  <aside id="chat-panel" class="chat-panel" aria-label="Chat">
+    <header class="chat-header">
+      <span>Chat</span>
+      <button id="chat-close" type="button" class="chat-close" aria-label="Tutup chat">×</button>
+    </header>
+    <ul id="chat-log" class="chat-log" aria-live="polite"></ul>
+    <form id="chat-form" autocomplete="off">
+      <label for="chat-input" class="visually-hidden">Pesan chat</label>
+      <input id="chat-input" name="chat-input" type="text" maxlength="100" placeholder="Ketik pesan..." />
+      <button id="chat-send" type="submit">Kirim</button>
+    </form>
+  </aside>
+
+  <!-- Floating chat toggle (visible only on small screens via CSS) -->
+  <button id="chat-toggle" type="button" class="chat-toggle" aria-label="Buka chat">💬</button>
+
+  <!-- Toast stack + game-over banner mount + confetti container -->
+  <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="false"></div>
+  <div id="event-banner" class="event-banner" role="status" aria-live="polite"></div>
+  <div id="confetti-stage" class="confetti-stage" aria-hidden="true"></div>
+
+  <!-- Socket.io client is served by the Socket.io server on port 3001. -->
+  <script>
+    (function () {
+      var s = document.createElement('script');
+      s.src = (location.protocol || 'http:') + '//' + location.hostname + ':3001/socket.io/socket.io.js';
+      s.onload = function () {
+        var g = document.createElement('script');
+        g.src = 'game.js';
+        document.body.appendChild(g);
+      };
+      s.onerror = function () {
+        document.getElementById('join-status').textContent =
+          'Failed to load Socket.io client. Is the WordFuse server running on port 3001?';
+      };
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
